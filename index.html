@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            body, html {
+                margin: 0;
+                padding: 0;
+                height: 100%;
+                background-color: black;
+            }
+            img,div{
+                display: block;
+                width: 100%;
+                height: 100%;
+                /* border: none; */
+                object-fit: contain; /* hoặc cover nếu bạn muốn ảnh phủ kín */
+            }
+        </style>
+    </head>
+    <body>
+        <script>
+            const parameters = new URLSearchParams(window.location.search);// Lấy các tham số từ URL
+            const min=parameters.get('min');//lấy giá trị nhỏ nhất cần thay
+            const max=parameters.get('max');//lấy giá trị lớn nhất cần thay
+            const url=parameters.get('url');//lấy giá trị url với {r} là vị trí cần thay cho các số từ min đến max
+            let tag=[];//khai báo mảng tag để chứa các thẻ img
+            for(let i=min;i<=max;i++){
+                tag.push(document.createElement('img'));// tạo thẻ img
+                tag[i-min].src=url.replace('{r}',String(i));// thay {r} bằng giá trị i
+                tag[i-min].alt="";// thêm thuộc tính alt
+                document.body.appendChild(tag[i-min]);// thêm thẻ img vào body
+            }
+        </script>
+    </body>
+</html>
